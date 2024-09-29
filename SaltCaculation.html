@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Koi Care - Salt Calculator</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <link rel="stylesheet" href="./assets/css/navHeader-Footer.css" />
+    <link rel="stylesheet" href="./assets/css/salt.css" />
+</head>
+
+<body>
+    <script src="./assets/js/headernav.js"></script>
+    <div class="salt-calculator container">
+        <h1 class="title">Salt Calculator</h1>
+        <div class="card-container">
+            <div class="card">
+                <div class="flex">
+                    <label for="pond-volume" class="text">Pond volume</label>
+                    <select
+                        id="pond-volume"
+                        class="form-control"
+                        onchange="selectPondVolume(this.value)"
+                    >
+                        <option value="13400">Main pond - 13,400 l</option>
+                        <option value="8500">Secondary pond - 8,500 l</option>
+                        <option value="1200">Small pond - 1,200 l</option>
+                    </select>
+                </div>
+                <div class="flex">
+                    <span class="text">Current concentration:</span>
+                    <span id="current-concentration-value" class="range-value">0.75 %</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex">
+                    <label for="desired-concentration" class="text">Desired concentration:</label>
+                    <span id="desired-concentration-value" class="range-value">0%</span>
+                </div>
+                <input
+                    type="range"
+                    id="desired-concentration"
+                    min="0"
+                    max="0.75"
+                    value="0"
+                    step="0.01"
+                    class="input-range"
+                />
+            </div>
+
+            <div class="card">
+                <div class="flex">
+                    <label for="water-change" class="text">Water change:</label>
+                    <span id="water-change-value" class="range-value">0 l (0%)</span>
+                </div>
+                <input
+                    type="range"
+                    id="water-change"
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="1"
+                    class="input-range"
+                />
+            </div>
+
+            <div class="card suggestion col-span-3">
+                <h2 class="suggestion-title">Suggestion</h2>
+                <p class="suggestion-text">
+                    Only add pure salt without iodine to the water! Too high of a salt concentration can be damaging to the koi. If you are unsure, please talk to a veterinarian. For fighting diseases and algae or for taking precautions, a concentration of 0.5% is recommended.
+                </p>
+            </div>
+        </div>
+
+        <div class="salt-amount-container">
+            <div class="salt-amount-row">
+                <span>Amount of salt needed:</span>
+                <span id="salt-amount">0 kg</span>
+            </div>
+            <div class="salt-amount-row salt-amount-row-margin">
+                <span>Per water change (refill):</span>
+                <span id="salt-amount-per-refill">0 kg</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/footer.js"></script>
+    <script>
+        // Constants for pond volume
+        const pondVolume = 13400; // Total pond volume in liters
+
+        // Function to update the displayed value for desired concentration
+        function updateDesiredConcentrationValue() {
+            const desiredConcentrationInput = document.getElementById("desired-concentration");
+            const desiredConcentration = desiredConcentrationInput.value;
+            const rangeValueDisplay = document.getElementById("desired-concentration-value");
+
+            rangeValueDisplay.textContent = (desiredConcentration * 100).toFixed(0) + "%";
+            calculateSaltAmount();
+        }
+
+        // Function to update the displayed value for water change
+        function updateWaterChangeValue() {
+            const waterChangeInput = document.getElementById("water-change");
+            const waterChange = waterChangeInput.value;
+            const rangeValueDisplay = document.getElementById("water-change-value");
+
+            rangeValueDisplay.textContent = waterChange + " l (" + ((waterChange / pondVolume) * 100).toFixed(0) + "%)";
+            calculateSaltAmount();
+        }
+
+        // Function to calculate the amount of salt needed
+        function calculateSaltAmount() {
+            const desiredConcentration = parseFloat(document.getElementById("desired-concentration").value);
+            const waterChangeLiters = parseFloat(document.getElementById("water-change").value);
+
+            if (waterChangeLiters > 0 && desiredConcentration > 0) {
+                const saltAmount = waterChangeLiters * desiredConcentration; // kg of salt
+                document.getElementById("salt-amount").textContent = saltAmount.toFixed(2) + " kg";
+
+                // Calculate amount of salt needed per refill
+                const saltAmountPerRefill = (waterChangeLiters * desiredConcentration).toFixed(2);
+                document.getElementById("salt-amount-per-refill").textContent = saltAmountPerRefill + " kg";
+            } else {
+                document.getElementById("salt-amount").textContent = "0 kg";
+                document.getElementById("salt-amount-per-refill").textContent = "0 kg";
+            }
+        }
+
+        // Add event listeners
+        document.getElementById("desired-concentration").addEventListener("input", updateDesiredConcentrationValue);
+        document.getElementById("water-change").addEventListener("input", updateWaterChangeValue);
+
+        // Initialize the displayed values
+        updateDesiredConcentrationValue();
+        updateWaterChangeValue();
+    </script>
+</body>
+</html>

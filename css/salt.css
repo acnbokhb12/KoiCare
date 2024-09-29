@@ -1,0 +1,125 @@
+.salt-calculator {
+  background-color: #f8f9fa;
+  max-width: 80%;
+  padding-top: 120px;
+  padding-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.form-control {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  color: #333;
+  width: 90%;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 3.8rem;
+  font-size: 2rem;
+}
+
+.form-control:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.form-control option {
+  background-color: #f9f9f9; 
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: #ffffff; 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.range-value {
+  font-weight: 600;
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+.text {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.input-range {
+  width: 100%;
+}
+
+.suggestion {
+  grid-column: span 3;
+  background-color: #f1f5f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.suggestion-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.suggestion-text {
+  font-size: 1.6rem;
+  color: #4b5563;
+}
+
+.salt-amount-container {
+  background-color: #000;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.salt-amount-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.salt-amount-row-margin {
+  margin-top: 20px;
+}
+
+#desired-concentration-value,
+#current-concentration-value,
+#water-change-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
